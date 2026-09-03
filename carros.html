@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>TCC - Seleção de Carros</title>
+</head>
+<body>
+
+  <h1>Buscar Modelos de Carro</h1>
+
+  <!-- Inputs para filtrar -->
+  <label for="ano">Ano:</label>
+  <input type="number" id="ano" value="2020">
+
+  <button onclick="carregarMarcas()">Buscar Marcas</button>
+
+  <br><br>
+
+  <label for="selectMarcas">Marca:</label>
+  <select id="selectMarcas" onchange="carregarModelos()" disabled>
+    <option value="">Selecione uma marca...</option>
+  </select>
+
+  <h3>Modelos Encontrados:</h3>
+  <ul id="listaModelos"></ul>
+
+  <script>
+    const API_URL = 'http://localhost:3000/api';
+
+    // 1. Buscar marcas baseadas no ano
+    async function carregarMarcas() {
+      const ano = document.getElementById('ano').value;
+      const selectMarcas = document.getElementById('selectMarcas');
+
+      try {
+        const response = await fetch(`${API_URL}/marcas?ano=${ano}`);
+        const marcas = await response.json();
+
+        selectMarcas.innerHTML = '<option value="">Selecione uma marca...</option>';
+        marcas.forEach(item => {
+          const option = document.createElement('option');
+          option.value = item.make_id; // Ex: "ford"
+          option.textContent = item.make_display; // Ex: "Ford"
+          selectMarcas.appendChild(option);
+        });
+
+        selectMarcas.disabled = false;
+      } catch (error) {
+        alert('Erro ao carregar marcas.');
+      }
+    }
+
+    // 2. Buscar modelos baseados no ano e na marca escolhida
+    async function carregarModelos() {
+      const ano = document.getElementById('ano').value;
+      const marca = document.getElementById('selectMarcas').value;
+      const lista = document.getElementById('listaModelos');
+
+      if (!marca) return;
+
+      try {
+        const response = await fetch(`${API_URL}/modelos?ano=${ano}&marca=${marca}`);
+        const modelos = await response.json();
+
+        lista.innerHTML = '';
+        modelos.forEach(carro => {
+          const li = document.createElement('li');
+          li.textContent = `${carro.model_name}`;
+          lista.appendChild(li);
+        });
+      } catch (error) {
+        alert('Erro ao carregar modelos.');
+      }
+    }
+  </script>
+</body>
+</html>
