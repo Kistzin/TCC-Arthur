@@ -448,3 +448,103 @@ footer p {
     }
 
 }
+
+
+/* Layout Responsivo para os 6 Cards */
+.novidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Card Base */
+.novidade-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #333333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animação ao Passar o Mouse (Hover) */
+.novidade-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* Área de Imagem */
+.novidade-imagem {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.novidade-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Zoom na imagem ao passar o mouse */
+.novidade-card:hover .novidade-imagem img {
+    transform: scale(1.06);
+}
+
+/* Tag/Selo de Destaque */
+.tag-novidade {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #e50914;
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Área de Texto */
+.novidade-conteudo {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.novidade-conteudo h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #111111;
+}
+
+.novidade-conteudo p {
+    font-size: 0.9rem;
+    color: #666666;
+    margin: 0;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.link-texto {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #e50914;
+    margin-top: 10px;
+    transition: color 0.2s ease;
+}
+
+.novidade-card:hover .link-texto {
+    color: #b20710;
+}

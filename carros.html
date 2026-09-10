@@ -1,77 +1,550 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <title>TCC - Seleção de Carros</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carros | CarZone</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <h1>Buscar Modelos de Carro</h1>
+    <header>
 
-  <!-- Inputs para filtrar -->
-  <label for="ano">Ano:</label>
-  <input type="number" id="ano" value="2020">
+        <nav>
+            <a href="index.html" class="logo">CarZone</a>
 
-  <button onclick="carregarMarcas()">Buscar Marcas</button>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="carros.html">Carros</a></li>
+                <li><a href="comparar.html">Comparar</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </nav>
 
-  <br><br>
+    </header>
 
-  <label for="selectMarcas">Marca:</label>
-  <select id="selectMarcas" onchange="carregarModelos()" disabled>
-    <option value="">Selecione uma marca...</option>
-  </select>
 
-  <h3>Modelos Encontrados:</h3>
-  <ul id="listaModelos"></ul>
+    <main class="pagina">
 
-  <script>
-    const API_URL = 'http://localhost:3000/api';
+        <!-- ============================= -->
+        <!-- NOVIDADES DO MERCADO -->
+        <!-- ============================= -->
 
-    // 1. Buscar marcas baseadas no ano
-    async function carregarMarcas() {
-      const ano = document.getElementById('ano').value;
-      const selectMarcas = document.getElementById('selectMarcas');
+        <section class="novidades">
 
-      try {
-        const response = await fetch(`${API_URL}/marcas?ano=${ano}`);
-        const marcas = await response.json();
+            <h1>Novidades do mercado</h1>
 
-        selectMarcas.innerHTML = '<option value="">Selecione uma marca...</option>';
-        marcas.forEach(item => {
-          const option = document.createElement('option');
-          option.value = item.make_id; // Ex: "ford"
-          option.textContent = item.make_display; // Ex: "Ford"
-          selectMarcas.appendChild(option);
-        });
+            <p>
+                Confira alguns dos modelos que estão chegando ou ganhando
+                destaque no mercado brasileiro.
+            </p>
 
-        selectMarcas.disabled = false;
-      } catch (error) {
-        alert('Erro ao carregar marcas.');
-      }
-    }
 
-    // 2. Buscar modelos baseados no ano e na marca escolhida
-    async function carregarModelos() {
-      const ano = document.getElementById('ano').value;
-      const marca = document.getElementById('selectMarcas').value;
-      const lista = document.getElementById('listaModelos');
+            <div class="cards">
 
-      if (!marca) return;
+                <article class="carro-card">
 
-      try {
-        const response = await fetch(`${API_URL}/modelos?ano=${ano}&marca=${marca}`);
-        const modelos = await response.json();
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
 
-        lista.innerHTML = '';
-        modelos.forEach(carro => {
-          const li = document.createElement('li');
-          li.textContent = `${carro.model_name}`;
-          lista.appendChild(li);
-        });
-      } catch (error) {
-        alert('Erro ao carregar modelos.');
-      }
-    }
-  </script>
+                    <h3>Renault Niagara</h3>
+
+                    <p>Picape</p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>Renault Koleos</h3>
+
+                    <p>SUV híbrido</p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>Volkswagen Tiguan</h3>
+
+                    <p>SUV</p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- BUSCAR MODELOS -->
+        <!-- ============================= -->
+
+        <section class="busca-carros">
+
+            <h2>Buscar modelos de carro</h2>
+
+            <p>
+                Escolha um ano e uma marca para encontrar os modelos
+                disponíveis.
+            </p>
+
+
+            <div class="busca-form">
+
+                <div class="campo">
+
+                    <label for="ano">
+                        Ano:
+                    </label>
+
+                    <input
+                        type="number"
+                        id="ano"
+                        value="2020"
+                    >
+
+                </div>
+
+
+                <button onclick="carregarMarcas()">
+                    Buscar Marcas
+                </button>
+
+
+                <div class="campo">
+
+                    <label for="selectMarcas">
+                        Marca:
+                    </label>
+
+                    <select
+                        id="selectMarcas"
+                        onchange="carregarModelos()"
+                        disabled
+                    >
+
+                        <option value="">
+                            Selecione uma marca...
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modelos-encontrados">
+
+                <h3>
+                    Modelos Encontrados
+                </h3>
+
+                <ul id="listaModelos"></ul>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- TODOS OS CARROS -->
+        <!-- ============================= -->
+
+        <section class="todos-carros">
+
+            <h2>Carros em destaque</h2>
+
+
+            <!-- FILTROS -->
+
+            <div class="filtros">
+
+                <button>Todos</button>
+
+                <button>Esportivos</button>
+
+                <button>Elétricos</button>
+
+                <button>Híbridos</button>
+
+                <button>SUVs</button>
+
+                <button>Supercarros</button>
+
+                <button>Luxo</button>
+
+            </div>
+
+
+            <!-- CARDS -->
+
+            <div class="cards">
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>BMW M2</h3>
+
+                    <p>Esportivo</p>
+
+                    <p>
+                        Motor: 3.0 Turbo
+                    </p>
+
+                    <p>
+                        Potência: 480 cv
+                    </p>
+
+                    <p>
+                        Preço: consulte
+                    </p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>Porsche 911</h3>
+
+                    <p>Esportivo</p>
+
+                    <p>
+                        Motor: 3.6 Híbrido
+                    </p>
+
+                    <p>
+                        Potência: consulte
+                    </p>
+
+                    <p>
+                        Preço: consulte
+                    </p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>GWM Haval H6</h3>
+
+                    <p>SUV híbrido</p>
+
+                    <p>
+                        Motor: Híbrido
+                    </p>
+
+                    <p>
+                        Potência: consulte
+                    </p>
+
+                    <p>
+                        Preço: consulte
+                    </p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>BYD Song Plus</h3>
+
+                    <p>SUV híbrido</p>
+
+                    <p>
+                        Motor: Híbrido
+                    </p>
+
+                    <p>
+                        Potência: consulte
+                    </p>
+
+                    <p>
+                        Preço: consulte
+                    </p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>Audi A5 Avant</h3>
+
+                    <p>Luxo</p>
+
+                    <p>
+                        Motor: 2.0 Turbo
+                    </p>
+
+                    <p>
+                        Potência: consulte
+                    </p>
+
+                    <p>
+                        Preço: consulte
+                    </p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+
+
+                <article class="carro-card">
+
+                    <div class="imagem-carro">
+                        CARRO
+                    </div>
+
+                    <h3>Mercedes-Benz E300</h3>
+
+                    <p>Luxo híbrido</p>
+
+                    <p>
+                        Motor: 2.0 Híbrido
+                    </p>
+
+                    <p>
+                        Potência: consulte
+                    </p>
+
+                    <p>
+                        Preço: consulte
+                    </p>
+
+                    <a href="detalhes.html">
+                        Ver detalhes
+                    </a>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <footer>
+
+        <p>
+            &copy; 2026 CarZone. Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ============================= -->
+    <!-- JAVASCRIPT DA API -->
+    <!-- ============================= -->
+
+    <script>
+
+        const API_URL = 'http://localhost:3000/api';
+
+
+        // ==========================================
+        // 1. BUSCAR MARCAS PELO ANO
+        // ==========================================
+
+        async function carregarMarcas() {
+
+            const ano =
+                document.getElementById('ano').value;
+
+            const selectMarcas =
+                document.getElementById('selectMarcas');
+
+
+            try {
+
+                const response =
+                    await fetch(`${API_URL}/marcas?ano=${ano}`);
+
+
+                const marcas =
+                    await response.json();
+
+
+                selectMarcas.innerHTML =
+                    '<option value="">Selecione uma marca...</option>';
+
+
+                marcas.forEach(item => {
+
+                    const option =
+                        document.createElement('option');
+
+
+                    option.value =
+                        item.make_id;
+
+
+                    option.textContent =
+                        item.make_display;
+
+
+                    selectMarcas.appendChild(option);
+
+                });
+
+
+                selectMarcas.disabled = false;
+
+
+            } catch (error) {
+
+                alert(
+                    'Erro ao carregar marcas. Verifique se o servidor está funcionando.'
+                );
+
+            }
+
+        }
+
+
+
+        // ==========================================
+        // 2. BUSCAR MODELOS PELO ANO + MARCA
+        // ==========================================
+
+        async function carregarModelos() {
+
+            const ano =
+                document.getElementById('ano').value;
+
+
+            const marca =
+                document.getElementById('selectMarcas').value;
+
+
+            const lista =
+                document.getElementById('listaModelos');
+
+
+            if (!marca) {
+
+                lista.innerHTML = '';
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${API_URL}/modelos?ano=${ano}&marca=${marca}`
+                    );
+
+
+                const modelos =
+                    await response.json();
+
+
+                lista.innerHTML = '';
+
+
+                modelos.forEach(carro => {
+
+                    const li =
+                        document.createElement('li');
+
+
+                    li.textContent =
+                        carro.model_name;
+
+
+                    lista.appendChild(li);
+
+                });
+
+
+            } catch (error) {
+
+                alert(
+                    'Erro ao carregar modelos. Verifique se o servidor está funcionando.'
+                );
+
+            }
+
+        }
+
+    </script>
+
 </body>
+
 </html>
