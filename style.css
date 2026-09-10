@@ -464,11 +464,11 @@ footer p {
 .novidade-card {
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #000000;
     border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
-    color: #333333;
+    color: #ff0000;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -476,7 +476,7 @@ footer p {
 /* Animação ao Passar o Mouse (Hover) */
 .novidade-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 12px 25px rgb(255, 0, 0);
 }
 
 /* Área de Imagem */
@@ -505,7 +505,7 @@ footer p {
     top: 12px;
     left: 12px;
     background-color: #e50914;
-    color: #ffffff;
+    color:black;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -526,7 +526,7 @@ footer p {
 .novidade-conteudo h2 {
     font-size: 1.2rem;
     margin: 0;
-    color: #111111;
+    color: #ff0000;
 }
 
 .novidade-conteudo p {
