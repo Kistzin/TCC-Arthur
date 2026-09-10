@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Comparar | CarZone</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+
+        <nav>
+            <a href="index.html" class="logo">CarZone</a>
+
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="carros.html">Carros</a></li>
+                <li><a href="comparar.html">Comparar</a></li>
+                <li><a href="categorias.html">Categorias</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <main class="pagina">
+
+        <section class="comparacao">
+
+            <h1>Compare carros</h1>
+
+            <p>
+                Escolha dois carros e veja suas principais características.
+            </p>
+
+
+            <div class="selecao-carros">
+
+                <div>
+                    <label for="carro1">Primeiro carro</label>
+
+                    <select id="carro1">
+
+                        <option value="">Escolha um carro</option>
+
+                        <option value="bmw">BMW M2</option>
+
+                        <option value="porsche">Porsche 911</option>
+
+                        <option value="haval">GWM Haval H6</option>
+
+                        <option value="byd">BYD Song Plus</option>
+
+                    </select>
+
+                </div>
+
+
+                <div>
+                    <label for="carro2">Segundo carro</label>
+
+                    <select id="carro2">
+
+                        <option value="">Escolha um carro</option>
+
+                        <option value="bmw">BMW M2</option>
+
+                        <option value="porsche">Porsche 911</option>
+
+                        <option value="haval">GWM Haval H6</option>
+
+                        <option value="byd">BYD Song Plus</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button onclick="compararCarros()">
+                Comparar
+            </button>
+
+
+            <div id="resultado-comparacao">
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>&copy; 2026 CarZone. Todos os direitos reservados.</p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
