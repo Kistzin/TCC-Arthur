@@ -1,4 +1,989 @@
 /* ==============================
+   PÁGINA CARROS (COMPLETA & TELA CHEIA)
+================================= */
+
+#carros-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 160px 8% 100px;
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(229, 9, 20, 0.12),
+            transparent 45%
+        ),
+        #080808;
+}
+
+#carros-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 5px;
+    height: 80%;
+    background-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+}
+
+.carros-conteudo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: heroEntrada 1s ease forwards;
+}
+
+.carros-conteudo > p:first-child {
+    color: #e50914;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.carros-conteudo h1 {
+    font-size: clamp(42px, 6.5vw, 80px);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+
+/* GRID DE CARDS DE CARRO */
+.carros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.carro-card {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 35px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carro-tag {
+    align-self: flex-start;
+    background-color: rgba(229, 9, 20, 0.15);
+    color: #e50914;
+    border: 1px solid rgba(229, 9, 20, 0.3);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.carro-card h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.carro-subtitulo {
+    color: #a0a0a0;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.carro-specs {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px 0;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.spec-item span { color: #777777; }
+.spec-item strong { color: #ffffff; font-weight: 700; }
+
+.btn-card {
+    color: #e50914;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.carro-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 12px 35px rgba(229, 9, 20, 0.18);
+}
+
+.carro-card:hover .btn-card {
+    transform: translateX(6px);
+}
+
+/* CONTAINER DA BUSCA VIA API */
+.busca-container {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 40px;
+    margin-bottom: 80px;
+}
+
+.busca-container h2 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.busca-subtitulo {
+    color: #a0a0a0;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+.busca-form {
+    display: grid;
+    grid-template-columns: 1fr auto 1.5fr;
+    gap: 20px;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+.campo label {
+    display: block;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.input-custom {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 14px 18px;
+    border-radius: 30px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-custom:focus {
+    border-color: #e50914;
+}
+
+.btn-buscar {
+    padding: 15px 30px;
+    border-radius: 30px;
+    background-color: #e50914;
+    color: #ffffff;
+    border: none;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-buscar:hover {
+    background-color: #ff1a25;
+    transform: translateY(-2px);
+}
+
+/* LISTA DE MODELOS RETORNADOS DA API */
+.modelos-encontrados {
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.modelos-encontrados h3 {
+    color: #e50914;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.lista-modelos {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.lista-modelos li {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.lista-modelos .item-vazio {
+    grid-column: 1 / -1;
+    background: transparent;
+    border: none;
+    color: #666666;
+    font-style: italic;
+    padding: 0;
+}
+
+/* SEÇÃO DE DESTAQUES E FILTROS */
+.secao-destaques h2 {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 35px;
+}
+
+.btn-filtro {
+    background-color: #121212;
+    color: #a0a0a0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-filtro:hover,
+.btn-filtro.active {
+    background-color: #e50914;
+    color: #ffffff;
+    border-color: #e50914;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 850px) {
+    #carros-hero { padding: 130px 6% 60px; }
+    .busca-form { grid-template-columns: 1fr; }
+    .busca-container { padding: 25px 20px; }
+}
+
+
+
+
+/* ==============================
+   PÁGINA CARROS (TELA CHEIA & ESPAÇADA)
+================================= */
+
+#carros-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 160px 8% 100px;
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(229, 9, 20, 0.12),
+            transparent 45%
+        ),
+        #080808;
+}
+
+/* Linha vermelha decorativa na lateral esquerda */
+#carros-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 5px;
+    height: 80%;
+    background-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+}
+
+.carros-conteudo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: heroEntrada 1s ease forwards;
+}
+
+.carros-conteudo > p:first-child {
+    color: #e50914;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.carros-conteudo h1 {
+    font-size: clamp(42px, 6.5vw, 80px);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 35px;
+}
+
+/* Grid de Carros */
+.carros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.carro-card {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 35px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carro-tag {
+    align-self: flex-start;
+    background-color: rgba(229, 9, 20, 0.15);
+    color: #e50914;
+    border: 1px solid rgba(229, 9, 20, 0.3);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.carro-card h2 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.carro-subtitulo {
+    color: #a0a0a0;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* Especificações Técnicas Dentro do Card */
+.carro-specs {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 0;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.spec-item span {
+    color: #777777;
+}
+
+.spec-item strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.btn-card {
+    color: #e50914;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+/* Hover Efeitos */
+.carro-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 12px 35px rgba(229, 9, 20, 0.18);
+}
+
+.carro-card:hover .btn-card {
+    transform: translateX(6px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #carros-hero {
+        padding: 130px 6% 60px;
+    }
+
+    #carros-hero::before {
+        width: 3px;
+    }
+
+    .carros-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+
+/* ==============================
+   PÁGINA COMPARAR (TELA CHEIA & ESPAÇADA)
+================================= */
+
+#comparar-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 160px 8% 100px;
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(229, 9, 20, 0.12),
+            transparent 45%
+        ),
+        #080808;
+}
+
+/* Linha vermelha decorativa na lateral esquerda */
+#comparar-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 5px;
+    height: 80%;
+    background-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+}
+
+.comparar-conteudo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: heroEntrada 1s ease forwards;
+}
+
+.comparar-conteudo > p:first-child {
+    color: #e50914;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.comparar-conteudo h1 {
+    font-size: clamp(42px, 6.5vw, 80px);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 35px;
+}
+
+/* Container dos Selects */
+.comparar-card-box {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 45px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.selecao-carros {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.select-group label {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.select-custom {
+    width: 100%;
+    background-color: #121212;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 16px 20px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.select-custom:focus {
+    border-color: #e50914;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.25);
+}
+
+.select-custom option {
+    background-color: #121212;
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* Divisor VS entre os campos */
+.vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 25px;
+}
+
+.vs-divider span {
+    background-color: #151515;
+    color: #e50914;
+    border: 1px solid rgba(229, 9, 20, 0.3);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+/* Botão de Comparar */
+.btn-comparar {
+    align-self: center;
+    padding: 16px 45px;
+    border-radius: 30px;
+    background-color: #e50914;
+    color: #ffffff;
+    border: none;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-comparar:hover {
+    background-color: #ff1a25;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(229, 9, 20, 0.35);
+}
+
+/* Área de Resultado */
+#resultado-comparacao {
+    width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+    #comparar-hero {
+        padding: 130px 6% 60px;
+    }
+
+    .comparar-card-box {
+        padding: 30px 20px;
+    }
+
+    .selecao-carros {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .vs-divider {
+        padding-top: 0;
+    }
+
+    .btn-comparar {
+        width: 100%;
+    }
+}
+
+
+
+
+/* ==============================
+   PÁGINA CATEGORIAS (TELA CHEIA & ESPAÇADA)
+================================= */
+
+#categorias-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 160px 8% 100px;
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(229, 9, 20, 0.12),
+            transparent 45%
+        ),
+        #080808;
+}
+
+/* Linha vermelha decorativa na lateral esquerda */
+#categorias-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 5px;
+    height: 80%;
+    background-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+}
+
+.categorias-conteudo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: heroEntrada 1s ease forwards;
+}
+
+.categorias-conteudo > p:first-child {
+    color: #e50914;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.categorias-conteudo h1 {
+    font-size: clamp(42px, 6.5vw, 80px);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 35px;
+}
+
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+.categoria-card {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 40px 32px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Número da tag da categoria */
+.card-tag {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    transition: color 0.3s ease;
+}
+
+.categoria-card h2 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.categoria-card h2::first-letter {
+    color: #e50914;
+}
+
+.categoria-card p {
+    color: #a0a0a0;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.card-link {
+    color: #e50914;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.categoria-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 12px 35px rgba(229, 9, 20, 0.18);
+}
+
+.categoria-card:hover .card-tag {
+    color: #e50914;
+}
+
+.categoria-card:hover .card-link {
+    transform: translateX(6px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #categorias-hero {
+        padding: 130px 6% 60px;
+    }
+
+    #categorias-hero::before {
+        width: 3px;
+    }
+
+    .categorias-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .categoria-card {
+        padding: 30px 24px;
+    }
+}
+
+
+
+
+/* ==============================
+   PÁGINA SOBRE (TELA CHEIA & ESPAÇADA)
+================================= */
+
+#sobre-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* Aumentado o padding vertical para preencher toda a tela */
+    padding: 160px 8% 100px;
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 75% 30%,
+            rgba(229, 9, 20, 0.12),
+            transparent 45%
+        ),
+        #080808;
+}
+
+/* Linha vermelha decorativa ajustada para acompanhar a altura completa */
+#sobre-hero::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    width: 5px;
+    height: 80%;
+    background-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.6);
+}
+
+.sobre-conteudo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: heroEntrada 1s ease forwards;
+}
+
+.sobre-conteudo > p:first-child {
+    color: #e50914;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
+}
+
+.sobre-conteudo h1 {
+    font-size: clamp(42px, 6.5vw, 80px);
+    line-height: 1;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 35px;
+}
+
+.descricao-destaque {
+    max-width: 850px;
+    color: #b5b5b5;
+    font-size: 20px;
+    line-height: 1.8;
+    /* Espaçamento maior antes do grid de cards */
+    margin-bottom: 70px;
+}
+
+/* Grid com mais espaçamento */
+.sobre-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 40px; /* Aumentado o espaço entre os cards */
+}
+
+.sobre-card {
+    background-color: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 40px 35px; /* Cards mais altos e espaçados internamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sobre-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(229, 9, 20, 0.5);
+    box-shadow: 0 12px 35px rgba(229, 9, 20, 0.18);
+}
+
+.sobre-card.full-width {
+    grid-column: 1 / -1;
+    margin-top: 20px; /* Separação extra para o card de tecnologias */
+}
+
+.sobre-card h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.sobre-card h2::first-letter {
+    color: #e50914;
+}
+
+.sobre-card p {
+    color: #a0a0a0;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Lista de Tecnologias espaçada */
+.tech-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.tech-list li {
+    background: #121212;
+    padding: 24px;
+    border-radius: 10px;
+    border-left: 4px solid #e50914;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tech-list li span {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.tech-list li small {
+    color: #888888;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Ajustes Responsivos para Celular */
+@media (max-width: 768px) {
+    #sobre-hero {
+        padding: 130px 6% 60px;
+    }
+
+    .descricao-destaque {
+        font-size: 17px;
+        margin-bottom: 45px;
+    }
+
+    .sobre-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .sobre-card {
+        padding: 30px 22px;
+    }
+
+    .tech-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==============================
    RESET
 ================================= */
 

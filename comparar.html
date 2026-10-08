@@ -29,67 +29,61 @@
     </header>
 
 
-    <main class="pagina">
+    <main>
 
-        <section class="comparacao">
+        <section id="comparar-hero">
 
-            <h1>Compare carros</h1>
+            <div class="comparar-conteudo">
 
-            <p>
-                Escolha dois carros e veja suas principais características.
-            </p>
+                <p>FERRAMENTA</p>
 
+                <h1>Compare Carros</h1>
 
-            <div class="selecao-carros">
+                <p class="descricao-destaque">
+                    Escolha dois veículos e analise lado a lado suas principais especificações e desempenho.
+                </p>
 
-                <div>
-                    <label for="carro1">Primeiro carro</label>
+                <div class="comparar-card-box">
 
-                    <select id="carro1">
+                    <div class="selecao-carros">
 
-                        <option value="">Escolha um carro</option>
+                        <div class="select-group">
+                            <label for="carro1">Primeiro Veículo</label>
+                            <select id="carro1" class="select-custom">
+                                <option value="">Selecione um carro</option>
+                                <option value="bmw">BMW M2</option>
+                                <option value="porsche">Porsche 911</option>
+                                <option value="haval">GWM Haval H6</option>
+                                <option value="byd">BYD Song Plus</option>
+                            </select>
+                        </div>
 
-                        <option value="bmw">BMW M2</option>
+                        <div class="vs-divider">
+                            <span>VS</span>
+                        </div>
 
-                        <option value="porsche">Porsche 911</option>
+                        <div class="select-group">
+                            <label for="carro2">Segundo Veículo</label>
+                            <select id="carro2" class="select-custom">
+                                <option value="">Selecione um carro</option>
+                                <option value="bmw">BMW M2</option>
+                                <option value="porsche">Porsche 911</option>
+                                <option value="haval">GWM Haval H6</option>
+                                <option value="byd">BYD Song Plus</option>
+                            </select>
+                        </div>
 
-                        <option value="haval">GWM Haval H6</option>
+                    </div>
 
-                        <option value="byd">BYD Song Plus</option>
-
-                    </select>
+                    <button class="btn-comparar" onclick="compararCarros()">
+                        Comparar Veículos
+                    </button>
 
                 </div>
 
-
-                <div>
-                    <label for="carro2">Segundo carro</label>
-
-                    <select id="carro2">
-
-                        <option value="">Escolha um carro</option>
-
-                        <option value="bmw">BMW M2</option>
-
-                        <option value="porsche">Porsche 911</option>
-
-                        <option value="haval">GWM Haval H6</option>
-
-                        <option value="byd">BYD Song Plus</option>
-
-                    </select>
-
+                <div id="resultado-comparacao">
+                    <!-- O JavaScript vai inserir o resultado do comparativo aqui -->
                 </div>
-
-            </div>
-
-
-            <button onclick="compararCarros()">
-                Comparar
-            </button>
-
-
-            <div id="resultado-comparacao">
 
             </div>
 
