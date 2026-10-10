@@ -1,4 +1,3 @@
-
 const API_URL = 'http://localhost:3000/api';
 
 async function carregarMarcas() {
@@ -24,17 +23,15 @@ async function carregarMarcas() {
 
 function preencherMarcas(idSelect, marcas) {
     const select = document.getElementById(idSelect);
+    if (!select) return;
 
     marcas.forEach(marca => {
         const option = document.createElement('option');
-
         option.value = marca.slug;
         option.textContent = marca.nome;
-
         select.appendChild(option);
     });
 }
-
 
 async function carregarModelos(numeroCarro) {
     const marcaSelect = document.getElementById(`marca${numeroCarro}`);
@@ -94,8 +91,6 @@ document.getElementById('marca2').addEventListener('change', () => {
     carregarModelos(2);
 });
 
-
-
 async function carregarVersoes(numeroCarro) {
     const marca = document.getElementById(`marca${numeroCarro}`).value;
     const modeloSelect = document.getElementById(`modelo${numeroCarro}`);
@@ -130,11 +125,9 @@ async function carregarVersoes(numeroCarro) {
 
         dados.versoes.forEach(versao => {
             const option = document.createElement('option');
-
             option.value = versao.id;
-option.textContent = versao.nome;
-option.dataset.anos = JSON.stringify(versao.anos || []);
-
+            option.textContent = versao.nome;
+            option.dataset.anos = JSON.stringify(versao.anos || []);
             versaoSelect.appendChild(option);
         });
 
@@ -154,7 +147,6 @@ document.getElementById('modelo2').addEventListener('change', () => {
     carregarVersoes(2);
 });
 
-
 function carregarAnos(numeroCarro) {
     const versaoSelect = document.getElementById(`versao${numeroCarro}`);
     const anoSelect = document.getElementById(`ano${numeroCarro}`);
@@ -172,10 +164,8 @@ function carregarAnos(numeroCarro) {
 
     anos.forEach(ano => {
         const option = document.createElement('option');
-
         option.value = ano;
         option.textContent = ano;
-
         anoSelect.appendChild(option);
     });
 
@@ -190,7 +180,6 @@ document.getElementById('versao2').addEventListener('change', () => {
     carregarAnos(2);
 });
 
-
 async function compararCarros() {
     const id1 = document.getElementById('versao1').value;
     const ano1 = document.getElementById('ano1').value;
@@ -201,11 +190,11 @@ async function compararCarros() {
     const resultado = document.getElementById('resultado-comparacao');
 
     if (!id1 || !ano1 || !id2 || !ano2) {
-        resultado.textContent = 'Selecione a versão e o ano dos dois carros.';
+        resultado.innerHTML = '<p style="color: #ff5555; text-align: center; margin-top: 20px;">Selecione a marca, modelo, versão e o ano dos dois carros.</p>';
         return;
     }
 
-    resultado.textContent = 'Comparando carros...';
+    resultado.innerHTML = '<p style="color: #ccc; text-align: center; margin-top: 20px;">Comparando carros...</p>';
 
     try {
         const parametros = new URLSearchParams({
@@ -215,90 +204,97 @@ async function compararCarros() {
             ano2
         });
 
-        const resposta = await fetch(
-            `${API_URL}/comparar?${parametros.toString()}`
-        );
+        const urlCompleta = `${API_URL}/comparar?${parametros.toString()}`;
+        console.log("Fazendo requisição para:", urlCompleta);
 
+        const resposta = await fetch(urlCompleta);
         const dados = await resposta.json();
 
+        console.log("Resposta da API de comparação:", dados);
+
         if (!resposta.ok) {
-            throw new Error(JSON.stringify(dados));
+            throw new Error(dados.mensagem || JSON.stringify(dados));
         }
 
-        
-resultado.innerHTML = '';
+        resultado.innerHTML = '';
 
-const carro1 = dados.carro1;
-const carro2 = dados.carro2;
+        const carro1 = dados.carro1;
+        const carro2 = dados.carro2;
 
-const titulo = document.createElement('h2');
-titulo.textContent = 'Resultado da comparação';
-resultado.appendChild(titulo);
+        const titulo = document.createElement('h2');
+        titulo.textContent = 'Resultado da comparação';
+        titulo.style.marginTop = '40px';
+        titulo.style.marginBottom = '10px';
+        resultado.appendChild(titulo);
 
-const subtitulo = document.createElement('p');
-subtitulo.textContent =
-  `${carro1.versao.marca} ${carro1.versao.nome} (${carro1.ano}) × ` +
-  `${carro2.versao.marca} ${carro2.versao.nome} (${carro2.ano})`;
+        const subtitulo = document.createElement('p');
+        subtitulo.textContent =
+            `${carro1.versao.marca} ${carro1.versao.nome} (${carro1.ano}) × ` +
+            `${carro2.versao.marca} ${carro2.versao.nome} (${carro2.ano})`;
+        subtitulo.style.color = '#a4a4ad';
+        subtitulo.style.marginBottom = '25px';
+        resultado.appendChild(subtitulo);
 
-resultado.appendChild(subtitulo);
+        // Junta as características dos dois carros pelo nome.
+        const itensCarro1 = new Map();
+        const itensCarro2 = new Map();
 
-// Junta as características dos dois carros pelo nome.
-const itensCarro1 = new Map();
-const itensCarro2 = new Map();
+        carro1.secoes.forEach(secao => {
+            secao.itens.forEach(item => {
+                itensCarro1.set(item.label, item.valor);
+            });
+        });
 
-carro1.secoes.forEach(secao => {
-  secao.itens.forEach(item => {
-    itensCarro1.set(item.label, item.valor);
-  });
-});
+        carro2.secoes.forEach(secao => {
+            secao.itens.forEach(item => {
+                itensCarro2.set(item.label, item.valor);
+            });
+        });
 
-carro2.secoes.forEach(secao => {
-  secao.itens.forEach(item => {
-    itensCarro2.set(item.label, item.valor);
-  });
-});
+        const todosLabels = new Set([
+            ...itensCarro1.keys(),
+            ...itensCarro2.keys()
+        ]);
 
-const todosLabels = new Set([
-  ...itensCarro1.keys(),
-  ...itensCarro2.keys()
-]);
+        const tabela = document.createElement('table');
+        tabela.className = 'tabela-comparacao';
 
-const tabela = document.createElement('table');
-tabela.className = 'tabela-comparacao';
+        const cabecalho = document.createElement('thead');
+        cabecalho.innerHTML = `
+            <tr>
+                <th>Característica</th>
+                <th>${carro1.versao.marca} ${carro1.versao.modelo || carro1.versao.nome}</th>
+                <th>${carro2.versao.marca} ${carro2.versao.modelo || carro2.versao.nome}</th>
+            </tr>
+        `;
+        tabela.appendChild(cabecalho);
 
-const cabecalho = document.createElement('thead');
-cabecalho.innerHTML = `
-  <tr>
-    <th>Característica</th>
-    <th>${carro1.versao.marca} ${carro1.versao.modelo}</th>
-    <th>${carro2.versao.marca} ${carro2.versao.modelo}</th>
-  </tr>
-`;
-tabela.appendChild(cabecalho);
+        const corpo = document.createElement('tbody');
 
-const corpo = document.createElement('tbody');
+        todosLabels.forEach(label => {
+            const linha = document.createElement('tr');
 
-todosLabels.forEach(label => {
-  const linha = document.createElement('tr');
+            const celulaLabel = document.createElement('th');
+            celulaLabel.textContent = label;
 
-  const celulaLabel = document.createElement('th');
-  celulaLabel.textContent = label;
+            const celulaCarro1 = document.createElement('td');
+            celulaCarro1.textContent = itensCarro1.get(label) ?? 'Não informado';
 
-  const celulaCarro1 = document.createElement('td');
-  celulaCarro1.textContent = itensCarro1.get(label) ?? 'Não informado';
+            const celulaCarro2 = document.createElement('td');
+            celulaCarro2.textContent = itensCarro2.get(label) ?? 'Não informado';
 
-  const celulaCarro2 = document.createElement('td');
-  celulaCarro2.textContent = itensCarro2.get(label) ?? 'Não informado';
+            linha.append(celulaLabel, celulaCarro1, celulaCarro2);
+            corpo.appendChild(linha);
+        });
 
-  linha.append(celulaLabel, celulaCarro1, celulaCarro2);
-  corpo.appendChild(linha);
-});
+        tabela.appendChild(corpo);
+        resultado.appendChild(tabela);
 
-tabela.appendChild(corpo);
-resultado.appendChild(tabela);
     } catch (erro) {
-        console.error('Erro ao comparar carros:', erro);
-        resultado.textContent = 'Não foi possível comparar os carros.';
+        console.error('Erro detalhado ao comparar carros:', erro);
+        resultado.innerHTML = `<p style="color: #ff5555; text-align: center; margin-top: 20px;">Não foi possível comparar os carros. Erro: ${erro.message}</p>`;
     }
 }
+
+// Inicializa a aplicação carregando as marcas ao abrir a página
 carregarMarcas();

@@ -12,180 +12,247 @@
 
 <body>
 
-    <header>
+    <header class="cz-header">
+        <a href="index.html" class="cz-logo">CAR<span>ZONE</span></a>
 
-        <nav>
-            <a href="index.html" class="logo">CarZone</a>
+        <!-- BOTÃO HAMBÚRGUER PARA DISPOSITIVOS MÓVEIS -->
+        <button class="cz-menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="carros.html">Carros</a></li>
-                <li><a href="comparar.html">Comparar</a></li>
-                <li><a href="categorias.html">Categorias</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-            </ul>
+        <nav class="cz-nav" id="czNav">
+            <a href="index.html">Início</a>
+            <a href="carros.html" class="ativo">Carros</a>
+            <a href="comparar.html">Comparar</a>
+            <a href="categorias.html">Categorias</a>
+            <a href="sobre.html">Sobre</a>
         </nav>
-
     </header>
 
 
-    <main>
+    <main class="cz-main">
 
-        <section id="carros-hero">
+        <!-- ============================= -->
+        <!-- NOVIDADES DO MERCADO -->
+        <!-- ============================= -->
 
-            <div class="carros-conteudo">
-
-                <!-- ============================= -->
-                <!-- NOVIDADES DO MERCADO -->
-                <!-- ============================= -->
-
-                <p>CATÁLOGO COMPLETO</p>
-
-                <h1>Novidades do Mercado</h1>
-
-                <p class="descricao-destaque">
-                    Confira alguns dos modelos que estão chegando ou ganhando destaque no mercado brasileiro.
-                </p>
-
-                <div class="carros-grid">
-
-                    <article class="carro-card">
-                        <div class="carro-tag">Picape</div>
-                        <h2>Renault Niagara</h2>
-                        <p class="carro-subtitulo">Nova picape intermediária com design moderno e robustez.</p>
-                        <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                    </article>
-
-                    <article class="carro-card">
-                        <div class="carro-tag">SUV Híbrido</div>
-                        <h2>Renault Koleos</h2>
-                        <p class="carro-subtitulo">Sofisticação, espaço interno e motorização híbrida eficiente.</p>
-                        <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                    </article>
-
-                    <article class="carro-card">
-                        <div class="carro-tag">SUV</div>
-                        <h2>Volkswagen Tiguan</h2>
-                        <p class="carro-subtitulo">Desempenho dinâmico e muita tecnologia para toda a família.</p>
-                        <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                    </article>
-
+        <section class="cz-secao">
+            <div class="cz-titulo-secao">
+                <div>
+                    <span class="cz-etiqueta">FIQUE POR DENTRO</span>
+                    <h2>Novidades <span>Automotivas</span></h2>
                 </div>
+                <p>Conheça modelos que estão chamando atenção no mercado.</p>
+            </div>
 
+            <div class="cz-grid">
 
-                <!-- ============================= -->
-                <!-- BUSCAR MODELOS (API) -->
-                <!-- ============================= -->
-
-                <div class="busca-container">
-
-                    <h2>Buscar Modelos de Carro</h2>
-                    <p class="busca-subtitulo">
-                        Escolha um ano e uma marca para encontrar os modelos disponíveis no banco de dados.
-                    </p>
-
-                    <div class="busca-form">
-
-                        <div class="campo">
-                            <label for="ano">Ano</label>
-                            <input type="number" id="ano" value="2020" class="input-custom">
+                <!-- Cada card é um link direto para o site oficial -->
+                <a href="https://www.renault.com.br" target="_blank" class="cz-card-link">
+                    <article class="cz-card">
+                        <div class="cz-foto">
+                            <span class="cz-tag">PICAPE CONCEITO</span>
+                            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" alt="Renault Niagara">
                         </div>
-
-                        <button onclick="carregarMarcas()" class="btn-buscar">
-                            Buscar Marcas
-                        </button>
-
-                        <div class="campo">
-                            <label for="selectMarcas">Marca</label>
-                            <select id="selectMarcas" onchange="carregarModelos()" disabled class="select-custom">
-                                <option value="">Selecione uma marca...</option>
-                            </select>
+                        <div class="cz-card-info">
+                            <span class="cz-marca">RENAULT</span>
+                            <h3>Renault Niagara</h3>
+                            <p>Um conceito que combina estilo moderno e robustez.</p>
+                            <span class="cz-link">Site Oficial <span>&nearr;</span></span>
                         </div>
+                    </article>
+                </a>
 
-                    </div>
+                <a href="https://www.renault.com.br" target="_blank" class="cz-card-link">
+                    <article class="cz-card">
+                        <div class="cz-foto">
+                            <span class="cz-tag">SUV HÍBRIDO</span>
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" alt="Renault Koleos">
+                        </div>
+                        <div class="cz-card-info">
+                            <span class="cz-marca">RENAULT</span>
+                            <h3>Renault Koleos</h3>
+                            <p>Espaço, conforto e motorização híbrida avançada.</p>
+                            <span class="cz-link">Site Oficial <span>&nearr;</span></span>
+                        </div>
+                    </article>
+                </a>
 
-                    <div class="modelos-encontrados">
-                        <h3>Modelos Encontrados</h3>
-                        <ul id="listaModelos" class="lista-modelos">
-                            <li class="item-vazio">Selecione uma marca acima para carregar os modelos...</li>
-                        </ul>
-                    </div>
+                <a href="https://www.vw.com.br" target="_blank" class="cz-card-link">
+                    <article class="cz-card">
+                        <div class="cz-foto">
+                            <span class="cz-tag">SUV</span>
+                            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=500" alt="Volkswagen Tiguan">
+                        </div>
+                        <div class="cz-card-info">
+                            <span class="cz-marca">VOLKSWAGEN</span>
+                            <h3>Volkswagen Tiguan</h3>
+                            <p>Desempenho dinâmico e muita tecnologia familiar.</p>
+                            <span class="cz-link">Site Oficial <span>&nearr;</span></span>
+                        </div>
+                    </article>
+                </a>
 
+            </div>
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- CATEGORIAS & 6 CARDS DINÂMICOS -->
+        <!-- ============================= -->
+
+        <section class="cz-secao cz-secao-destaques">
+            <div class="cz-titulo-secao">
+                <div>
+                    <span class="cz-etiqueta">DESTAQUES</span>
+                    <h2>Carros em <span>destaque</span></h2>
                 </div>
+                <p>Selecione uma categoria para visualizar os 6 modelos correspondentes.</p>
+            </div>
+
+            <!-- CATEGORIAS CENTRALIZADAS E COM BORDAS ARREDONDADAS -->
+            <div class="cz-filtros-centralizados">
+                <button class="cz-btn-categoria ativo" onclick="filtrarCategoria('todos', event)">Todos</button>
+                <button class="cz-btn-categoria" onclick="filtrarCategoria('esportivos', event)">Esportivos</button>
+                <button class="cz-btn-categoria" onclick="filtrarCategoria('eletricos', event)">Elétricos</button>
+                <button class="cz-btn-categoria" onclick="filtrarCategoria('hibridos', event)">Híbridos</button>
+                <button class="cz-btn-categoria" onclick="filtrarCategoria('suvs', event)">SUVs</button>
+                <button class="cz-btn-categoria" onclick="filtrarCategoria('supercarros', event)">Supercarros</button>
+                <button class="cz-btn-categoria" onclick="filtrarCategoria('luxo', event)">Luxo</button>
+            </div>
+
+            <!-- GRID DINÂMICO -->
+            <div class="cz-grid" id="gridCarros">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </section>
+
+    </main>
 
 
-                <!-- ============================= -->
-                <!-- TODOS OS CARROS EM DESTAQUE -->
-                <!-- ============================= -->
+    <footer class="cz-footer">
+        <a href="index.html" class="cz-logo">CAR<span>ZONE</span></a>
+        <p>&copy; 2026 CarZone. Todos os direitos reservados.</p>
+    </footer>
 
-                <div class="secao-destaques">
 
-                    <h2>Carros em Destaque</h2>
 
-                    <!-- FILTROS -->
-                    <div class="filtros">
-                        <button class="btn-filtro active">Todos</button>
-                        <button class="btn-filtro">Esportivos</button>
-                        <button class="btn-filtro">Elétricos</button>
-                        <button class="btn-filtro">Híbridos</button>
-                        <button class="btn-filtro">SUVs</button>
-                        <button class="btn-filtro">Supercarros</button>
-                        <button class="btn-filtro">Luxo</button>
-                    </div>
+    <!-- ============================= -->
+    <!-- SCRIPT DE CATEGORIAS E MENU HAMBÚRGUER -->
+    <!-- ============================= -->
 
-                    <!-- CARDS DE DESTAQUE -->
-                    <div class="carros-grid">
+    <script>
+        const baseDeCarros = {
+            todos: [
+                { nome: "BMW M2", cat: "Esportivo", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=500", desc: "Motor: 3.0 Turbo • Potência: 480 cv", link: "https://www.bmw.com.br" },
+                { nome: "Porsche 911", cat: "Esportivo", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500", desc: "Motor: 3.6 Híbrido • Potência: 510 cv", link: "https://www.porsche.com/brazil/pt/" },
+                { nome: "Tesla Model S", cat: "Elétrico", img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", desc: "Motor: Dual Motor EV • Potência: 670 cv", link: "https://www.tesla.com" },
+                { nome: "GWM Haval H6", cat: "Híbrido", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", desc: "Motor: 1.5 Híbrido • Potência: 393 cv", link: "https://www.gwmmotors.com.br" },
+                { nome: "Toyota SW4", cat: "SUV", img: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=500", desc: "Motor: 2.8 Turbo Diesel • Potência: 204 cv", link: "https://www.toyota.com.br" },
+                { nome: "Audi A5 Avant", cat: "Luxo", img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=500", desc: "Motor: 2.0 Turbo • Potência: 265 cv", link: "https://www.audi.com.br" }
+            ],
+            esportivos: [
+                { nome: "BMW M2", cat: "Esportivo", img: "https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=500", desc: "Motor: 3.0 Turbo • Potência: 480 cv", link: "https://www.bmw.com.br" },
+                { nome: "Porsche 911", cat: "Esportivo", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500", desc: "Motor: 3.6 Híbrido • Potência: 510 cv", link: "https://www.porsche.com/brazil/pt/" },
+                { nome: "Ford Mustang GT", cat: "Esportivo", img: "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=500", desc: "Motor: 5.0 V8 • Potência: 488 cv", link: "https://www.ford.com.br" },
+                { nome: "Chevrolet Camaro", cat: "Esportivo", img: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=500", desc: "Motor: 6.2 V8 • Potência: 461 cv", link: "https://www.chevrolet.com.br" },
+                { nome: "Audi RS5", cat: "Esportivo", img: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=500", desc: "Motor: 2.9 V6 Bi-Turbo • Potência: 450 cv", link: "https://www.audi.com.br" },
+                { nome: "Nissan GT-R", cat: "Esportivo", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=500", desc: "Motor: 3.8 V6 Bi-Turbo • Potência: 570 cv", link: "https://www.nissan.com.br" }
+            ],
+            eletricos: [
+                { nome: "Tesla Model S", cat: "Elétrico", img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", desc: "Motor: Dual Motor EV • Potência: 670 cv", link: "https://www.tesla.com" },
+                { nome: "Porsche Taycan", cat: "Elétrico", img: "https://images.unsplash.com/photo-1619767886558-efdc259cde1b?w=500", desc: "Motor: Performance EV • Potência: 761 cv", link: "https://www.porsche.com/brazil/pt/" },
+                { nome: "Audi e-tron GT", cat: "Elétrico", img: "https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=500", desc: "Motor: Quattro EV • Potência: 530 cv", link: "https://www.audi.com.br" },
+                { nome: "BYD Seal", cat: "Elétrico", img: "https://images.unsplash.com/photo-1629897048994-3a992432c1e8?w=500", desc: "Motor: Blade Battery EV • Potência: 531 cv", link: "https://www.byd.com/br" },
+                { nome: "Volvo EX30", cat: "Elétrico", img: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", desc: "Motor: Single Motor EV • Potência: 272 cv", link: "https://www.volvocars.com/br" },
+                { nome: "Hyundai Ioniq 5", cat: "Elétrico", img: "https://images.unsplash.com/photo-1541348263662-e052662afda3?w=500", desc: "Motor: Electric AWD • Potência: 325 cv", link: "https://www.hyundai.com.br" }
+            ],
+            hibridos: [
+                { nome: "GWM Haval H6", cat: "Híbrido", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", desc: "Motor: 1.5 Híbrido • Potência: 393 cv", link: "https://www.gwmmotors.com.br" },
+                { nome: "BYD Song Plus", cat: "Híbrido", img: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=500", desc: "Motor: 1.5 + Elétrico • Potência: 235 cv", link: "https://www.byd.com/br" },
+                { nome: "Toyota Corolla Cross", cat: "Híbrido", img: "https://images.unsplash.com/photo-1590362891991-f776e747a588?w=500", desc: "Motor: 1.8 Flex Híbrido • Potência: 122 cv", link: "https://www.toyota.com.br" },
+                { nome: "Volvo XC60 Recharge", cat: "Híbrido", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", desc: "Motor: 2.0 Plug-in • Potência: 462 cv", link: "https://www.volvocars.com/br" },
+                { nome: "Honda Civic Hybrid", cat: "Híbrido", img: "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=500", desc: "Motor: 2.0 e:HEV • Potência: 184 cv", link: "https://www.honda.com.br" },
+                { nome: "Lexus NX 350h", cat: "Híbrido", img: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=500", desc: "Motor: 2.5 Híbrido • Potência: 246 cv", link: "https://www.lexus.com.br" }
+            ],
+            suvs: [
+                { nome: "Toyota SW4", cat: "SUV", img: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=500", desc: "Motor: 2.8 Diesel • Potência: 204 cv", link: "https://www.toyota.com.br" },
+                { nome: "Jeep Commander", cat: "SUV", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", desc: "Motor: 2.0 Turbo • Potência: 272 cv", link: "https://www.jeep.com.br" },
+                { nome: "Chevrolet Trailblazer", cat: "SUV", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Motor: 2.8 Turbo Diesel • Potência: 200 cv", link: "https://www.chevrolet.com.br" },
+                { nome: "Volkswagen Tiguan", cat: "SUV", img: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=500", desc: "Motor: 2.0 TSI • Potência: 186 cv", link: "https://www.vw.com.br" },
+                { nome: "Land Rover Defender", cat: "SUV", img: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=500", desc: "Motor: 3.0 Turbo • Potência: 300 cv", link: "https://www.landrover.com.br" },
+                { nome: "Mitsubishi Pajero", cat: "SUV", img: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", desc: "Motor: 3.2 Diesel • Potência: 180 cv", link: "https://www.mitsubishimotors.com.br" }
+            ],
+            supercarros: [
+                { nome: "Ferrari F8 Tributo", cat: "Supercarro", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500", desc: "Motor: 3.9 V8 Bi-Turbo • Potência: 720 cv", link: "https://www.ferrari.com" },
+                { nome: "Lamborghini Huracán", cat: "Supercarro", img: "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=500", desc: "Motor: 5.2 V10 • Potência: 640 cv", link: "https://www.lamborghini.com" },
+                { nome: "McLaren 720S", cat: "Supercarro", img: "https://images.unsplash.com/photo-1621135802920-133df287f89c?w=500", desc: "Motor: 4.0 V8 Bi-Turbo • Potência: 720 cv", link: "https://cars.mclaren.com" },
+                { nome: "Aston Martin Vantage", cat: "Supercarro", img: "https://images.unsplash.com/photo-1607853588005-b932c9681bc7?w=500", desc: "Motor: 4.0 V8 Bi-Turbo • Potência: 510 cv", link: "https://www.astonmartin.com" },
+                { nome: "Bugatti Chiron", cat: "Supercarro", img: "https://images.unsplash.com/photo-1563720223185-11003d516935?w=500", desc: "Motor: 8.0 W16 • Potência: 1500 cv", link: "https://www.bugatti.com" },
+                { nome: "Koenigsegg Jesko", cat: "Supercarro", img: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=500", desc: "Motor: 5.0 V8 Bi-Turbo • Potência: 1600 cv", link: "https://www.koenigsegg.com" }
+            ],
+            luxo: [
+                { nome: "Audi A5 Avant", cat: "Luxo", img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=500", desc: "Motor: 2.0 Turbo • Potência: 265 cv", link: "https://www.audi.com.br" },
+                { nome: "Mercedes-Benz E300", cat: "Luxo", img: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=500", desc: "Motor: 2.0 Híbrido • Potência: 258 cv", link: "https://www.mercedes-benz.com.br" },
+                { nome: "BMW Série 7", cat: "Luxo", img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=500", desc: "Motor: 3.0 Turbo • Potência: 381 cv", link: "https://www.bmw.com.br" },
+                { nome: "Audi A8", cat: "Luxo", img: "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=500", desc: "Motor: 3.0 V6 • Potência: 340 cv", link: "https://www.audi.com.br" },
+                { nome: "Porsche Panamera", cat: "Luxo", img: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=500", desc: "Motor: 2.9 V6 Bi-Turbo • Potência: 330 cv", link: "https://www.porsche.com/brazil/pt/" },
+                { nome: "Volvo S90", cat: "Luxo", img: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500", desc: "Motor: 2.0 Híbrido • Potência: 407 cv", link: "https://www.volvocars.com/br" }
+            ]
+        };
 
-                        <article class="carro-card">
-                            <div class="carro-tag">Esportivo</div>
-                            <h2>BMW M2</h2>
-                            <div class="carro-specs">
-                                <div class="spec-item"><span>Motor</span><strong>3.0 Turbo</strong></div>
-                                <div class="spec-item"><span>Potência</span><strong>480 cv</strong></div>
-                                <div class="spec-item"><span>Preço</span><strong>Consulte</strong></div>
-                            </div>
-                            <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                        </article>
+        // RENDERIZA OS CARDS ONDE O CARD INTEIRO É CLICÁVEL E LEVA AO SITE OFICIAL
+        function renderizarCards(lista) {
+            const grid = document.getElementById('gridCarros');
+            grid.innerHTML = '';
 
-                        <article class="carro-card">
-                            <div class="carro-tag">Esportivo</div>
-                            <h2>Porsche 911</h2>
-                            <div class="carro-specs">
-                                <div class="spec-item"><span>Motor</span><strong>3.6 Híbrido</strong></div>
-                                <div class="spec-item"><span>Potência</span><strong>Consulte</strong></div>
-                                <div class="spec-item"><span>Preço</span><strong>Consulte</strong></div>
-                            </div>
-                            <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                        </article>
+            lista.forEach(carro => {
+                const a = document.createElement('a');
+                a.href = carro.link;
+                a.target = "_blank";
+                a.className = 'cz-card-link';
+                
+                a.innerHTML = `
+                    <article class="cz-card">
+                        <div class="cz-foto">
+                            <span class="cz-tag">${carro.cat.toUpperCase()}</span>
+                            <img src="${carro.img}" alt="${carro.nome}">
+                        </div>
+                        <div class="cz-card-info">
+                            <h3>${carro.nome}</h3>
+                            <p>${carro.desc}</p>
+                            <span class="cz-link">Site Oficial <span>&nearr;</span></span>
+                        </div>
+                    </article>
+                `;
+                grid.appendChild(a);
+            });
+        }
 
-                        <article class="carro-card">
-                            <div class="carro-tag">SUV Híbrido</div>
-                            <h2>GWM Haval H6</h2>
-                            <div class="carro-specs">
-                                <div class="spec-item"><span>Motor</span><strong>Híbrido</strong></div>
-                                <div class="spec-item"><span>Potência</span><strong>Consulte</strong></div>
-                                <div class="spec-item"><span>Preço</span><strong>Consulte</strong></div>
-                            </div>
-                            <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                        </article>
+        // FUNÇÃO DE FILTRO DAS CATEGORIAS
+        function filtrarCategoria(categoria, event) {
+            document.querySelectorAll('.cz-btn-categoria').forEach(btn => btn.classList.remove('ativo'));
+            event.target.classList.add('ativo');
+            renderizarCards(baseDeCarros[categoria]);
+        }
 
-                        <article class="carro-card">
-                            <div class="carro-tag">SUV Híbrido</div>
-                            <h2>BYD Song Plus</h2>
-                            <div class="carro-specs">
-                                <div class="spec-item"><span>Motor</span><strong>Híbrido</strong></div>
-                                <div class="spec-item"><span>Potência</span><strong>Consulte</strong></div>
-                                <div class="spec-item"><span>Preço</span><strong>Consulte</strong></div>
-                            </div>
-                            <a href="detalhes.html" class="btn-card">Ver detalhes &rarr;</a>
-                        </article>
+        // LÓGICA DO MENU HAMBÚRGUER (MOBILE)
+        const menuToggle = document.getElementById('menuToggle');
+        const czNav = document.getElementById('czNav');
 
-                        <article class="carro-card">
-                            <div class="carro-tag">Luxo</div>
-                            <h2>Audi A5 Avant</h2>
-                            <div class="carro-specs">
-                                <div class="spec-item"><span>Motor</span><strong>2.0 Turbo</strong></div>
-                                <div class="spec-item"><span>Potência</span><strong>Consulte</strong></div>
-                                <div class="spec-item"><span>Preço</span><strong>Consulte</strong></div>
-                            </div>
-                            <a href="detalhes.html" class="btn-card">Ver detalhes &rarr
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('ativo');
+            czNav.classList.toggle('ativo');
+        });
+
+        // CARREGAMENTO INICIAL
+        window.onload = function() {
+            renderizarCards(baseDeCarros.todos);
+        };
+    </script>
+
+</body>
+
+</html>

@@ -6,6 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comparar | CarZone</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos modernos e limpos para a tabela de comparação no TCC */
+        .tabela-comparacao {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: #151518;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #29292f;
+        }
+
+        .tabela-comparacao th, .tabela-comparacao td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #29292f;
+            font-size: 14px;
+        }
+
+        .tabela-comparacao thead th {
+            background: #1f1f26;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .tabela-comparacao tbody th {
+            color: #e32636;
+            font-weight: 600;
+            background: #111114;
+        }
+
+        .tabela-comparacao td {
+            color: #d0d0d5;
+        }
+
+        .tabela-comparacao tr:hover td, .tabela-comparacao tr:hover th {
+            background: rgba(227, 38, 54, 0.04);
+        }
+
+        .select-group {
+            margin-bottom: 15px;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,7 +62,7 @@
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="carros.html">Carros</a></li>
-                <li><a href="comparar.html">Comparar</a></li>
+                <li><a href="comparar.html" class="ativo">Comparar</a></li>
                 <li><a href="categorias.html">Categorias</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
             </ul>
@@ -25,51 +71,94 @@
 
     <main>
         <section id="comparar-hero">
-            <div class="comparar-conteudo">
+            <div class="comparar-conteudo" style="width: min(1200px, 90%); margin: 0 auto; padding: 120px 0 60px;">
                 <p>FERRAMENTA</p>
                 <h1>Compare Carros</h1>
 
                 <p class="descricao-destaque">
-                    Escolha dois veículos e analise lado a lado suas principais especificações e desempenho.
+                    Selecione a marca, o modelo, a versão e o ano de dois veículos para analisar suas especificações lado a lado.
                 </p>
 
                 <div class="comparar-card-box">
                     <div class="selecao-carros">
-                        <div class="select-group">
-                            <label for="carro1">Primeiro Veículo</label>
-                            <select id="carro1" class="select-custom">
-                                <option value="">Selecione um carro</option>
-                                <option value="bmw">BMW M2</option>
-                                <option value="porsche">Porsche 911</option>
-                                <option value="haval">GWM Haval H6</option>
-                                <option value="byd">BYD Song Plus</option>
-                            </select>
+                        
+                        <!-- PRIMEIRO CARRO -->
+                        <div class="select-box" style="background: #121215; padding: 25px; border-radius: 12px; border: 1px solid #29292f;">
+                            <h3 style="color: #e32636; margin-bottom: 20px;">Veículo 1</h3>
+                            
+                            <div class="select-group">
+                                <label for="marca1">Marca</label>
+                                <select id="marca1" class="select-custom" onchange="carregarModelos(1)">
+                                    <option value="">Escolha uma marca</option>
+                                </select>
+                            </div>
+
+                            <div class="select-group">
+                                <label for="modelo1">Modelo</label>
+                                <select id="modelo1" class="select-custom" disabled onchange="carregarVersoes(1)">
+                                    <option value="">Escolha um modelo</option>
+                                </select>
+                            </div>
+
+                            <div class="select-group">
+                                <label for="versao1">Versão</label>
+                                <select id="versao1" class="select-custom" disabled onchange="carregarAnos(1)">
+                                    <option value="">Escolha uma versão</option>
+                                </select>
+                            </div>
+
+                            <div class="select-group" style="margin-bottom: 0;">
+                                <label for="ano1">Ano</label>
+                                <select id="ano1" class="select-custom" disabled>
+                                    <option value="">Escolha um ano</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="vs-divider">
-                            <span>VS</span>
+                        <!-- SEGUNDO CARRO -->
+                        <div class="select-box" style="background: #121215; padding: 25px; border-radius: 12px; border: 1px solid #29292f;">
+                            <h3 style="color: #e32636; margin-bottom: 20px;">Veículo 2</h3>
+                            
+                            <div class="select-group">
+                                <label for="marca2">Marca</label>
+                                <select id="marca2" class="select-custom" onchange="carregarModelos(2)">
+                                    <option value="">Escolha uma marca</option>
+                                </select>
+                            </div>
+
+                            <div class="select-group">
+                                <label for="modelo2">Modelo</label>
+                                <select id="modelo2" class="select-custom" disabled onchange="carregarVersoes(2)">
+                                    <option value="">Escolha um modelo</option>
+                                </select>
+                            </div>
+
+                            <div class="select-group">
+                                <label for="versao2">Versão</label>
+                                <select id="versao2" class="select-custom" disabled onchange="carregarAnos(2)">
+                                    <option value="">Escolha uma versão</option>
+                                </select>
+                            </div>
+
+                            <div class="select-group" style="margin-bottom: 0;">
+                                <label for="ano2">Ano</label>
+                                <select id="ano2" class="select-custom" disabled>
+                                    <option value="">Escolha um ano</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="select-group">
-                            <label for="carro2">Segundo Veículo</label>
-                            <select id="carro2" class="select-custom">
-                                <option value="">Selecione um carro</option>
-                                <option value="bmw">BMW M2</option>
-                                <option value="porsche">Porsche 911</option>
-                                <option value="haval">GWM Haval H6</option>
-                                <option value="byd">BYD Song Plus</option>
-                            </select>
-                        </div>
                     </div>
 
-                    <button class="btn-comparar" onclick="compararCarros()">
-                        Comparar Veículos
-                    </button>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn-comparar" onclick="compararCarros()">
+                            Comparar Veículos
+                        </button>
+                    </div>
                 </div>
 
-                <div id="resultado-comparacao">
-                    <!-- O JavaScript vai inserir o resultado do comparativo aqui -->
-                </div>
+                <!-- Área onde a tabela gerada pelo script.js será injetada -->
+                <div id="resultado-comparacao"></div>
             </div>
         </section>
     </main>
