@@ -296,5 +296,17 @@ async function compararCarros() {
     }
 }
 
+const menuToggle = document.getElementById('menuToggle');
+const czNav = document.getElementById('czNav');
+
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('ativo');
+    czNav.classList.toggle('ativo');
+});
+
+// CARREGAMENTO INICIAL
+window.onload = function () {
+    renderizarCards(baseDeCarros.todos);
+};
 // Inicializa a aplicação carregando as marcas ao abrir a página
 carregarMarcas();
