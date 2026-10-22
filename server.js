@@ -6,11 +6,16 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+
 
 const CARPEDIA_API_URL = 'https://www.carpedia.com.br/api/v1';
 const CARPEDIA_API_KEY = process.env.CARPEDIA_API_KEY;
+console.log(
+  'Chave da Carpedia carregada:',
+  Boolean(CARPEDIA_API_KEY),
+  'Tamanho:',
+  CARPEDIA_API_KEY?.length || 0
+);
 
 // Habilita CORS para o Front-End acessar
 app.use(cors());
@@ -210,6 +215,10 @@ app.get('/api/comparar', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('API do TCC rodando na porta 3000');
+
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
